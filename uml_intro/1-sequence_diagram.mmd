@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant User
+    participant Library
+    participant Book
+    User->>Library: createLoan()
+    Library->>Book: isAvailable()
+    create participant Loan
+    Library->>Loan: new Loan()
+    Library-->>User: loan created
