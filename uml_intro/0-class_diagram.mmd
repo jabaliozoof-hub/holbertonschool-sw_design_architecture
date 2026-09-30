@@ -1,0 +1,36 @@
+classDiagram
+    direction LR
+    class Library {
+        +String name
+        +list books
+        +list users
+        +list loans
+        +addBook()
+        +registerUser()
+        +createLoan()
+    }
+    class Book {
+        +String title
+        +String author
+        +String isbn
+        +bool available
+        +isAvailable()
+    }
+    class User {
+        +String name
+        +String userId
+        +String email
+        +list loans
+        +getDetails()
+    }
+    class Loan {
+        +Date loanDate
+        +Date dueDate
+        +Date returnDate
+        +status()
+    }
+    Library "1" *-- "*" Book : contains
+    Library "1" *-- "*" User : manages
+    Library "1" *-- "*" Loan : tracks
+    User "1" --> "*" Loan : makes
+    Book "1" --> "*" Loan : is part of
