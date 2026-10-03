@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-0-factory.py: Extending a vehicle factory registry with Scooter.
+0-factory.py: Extending a vehicle
+factory registry with Scooter.
 """
 
 from abc import ABC, abstractmethod
@@ -11,7 +12,7 @@ class Vehicle(ABC):
 
     @abstractmethod
     def mode(self) -> str:
-        """Return the mode of transportation."""
+        """Return transport mode."""
         pass
 
 
@@ -36,34 +37,34 @@ class Scooter(Vehicle):
 
 
 class VehicleFactory:
-    """A factory that manages vehicle creation via a dynamic registry."""
+    """A factory that manages vehicles."""
 
     def __init__(self):
         self._registry = {}
 
     def register_kind(self, name: str, cls):
-        """Registers a new vehicle class under a given string key."""
+        """Register a new vehicle class."""
         self._registry[name] = cls
 
     def create(self, kind: str) -> Vehicle:
-        """Creates an instance of the requested vehicle kind from the registry."""
+        """Create requested vehicle."""
         if kind not in self._registry:
-            raise ValueError(f"Unknown vehicle kind: {kind}")
+            raise ValueError(
+                f"Unknown vehicle kind: {kind}"
+            )
         return self._registry[kind]()
 
 
 def main():
     factory = VehicleFactory()
 
-    # Registering default types
     factory.register_kind("bus", Bus)
     factory.register_kind("train", Train)
     factory.register_kind("bike", Bike)
+    factory.register_kind(
+        "scooter", Scooter
+    )
 
-    # Registering the new scooter type as requested
-    factory.register_kind("scooter", Scooter)
-
-    # Testing the factory outputs
     print(factory.create("bus").mode())
     print(factory.create("train").mode())
     print(factory.create("bike").mode())
